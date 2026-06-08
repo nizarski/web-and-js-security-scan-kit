@@ -121,6 +121,28 @@ nikto -h http://localhost/
 
 ---
 
+## 6. Wapiti - Web Application Vulnerability Scanner
+
+### Install
+
+```bash
+pip install wapiti3 --break-system-packages
+```
+
+### Run Scan
+
+```bash
+wapiti -u https://localhost/ --scope folder -d 10 --max-links-per-page 100 -S insane --verify-ssl 0 -f html -o ./wapiti_report
+```
+
+Results will be saved to:
+
+```text
+./wapiti_report/
+```
+
+---
+
 # Recommended Workflow
 
 Run the following tools in order:
@@ -130,6 +152,7 @@ Run the following tools in order:
 3. **Retire.js** → Vulnerable dependency detection
 4. **TruffleHog** → Secret and credential discovery
 5. **Nikto** → Web server vulnerability assessment
+6. **Wapiti** → Web application vulnerability scanning (XSS, injection, misconfigurations)
 
 ## Example
 
@@ -143,6 +166,9 @@ npx retire
 sudo trufflehog filesystem .
 
 nikto -h http://localhost/
+
+pip install wapiti3 --break-system-packages
+wapiti -u https://localhost/ --scope folder -d 10 --max-links-per-page 100 -S insane --verify-ssl 0 -f html -o ./wapiti_report
 ```
 
 ---
@@ -156,6 +182,7 @@ nikto -h http://localhost/
 | Retire.js | Detect vulnerable JS dependencies |
 | TruffleHog | Secret scanning |
 | Nikto | Web server vulnerability scanning |
+| Wapiti | Web application vulnerability scanning (DAST) |
 
 ## License
 
